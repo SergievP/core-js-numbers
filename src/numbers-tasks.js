@@ -321,7 +321,7 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return Math.sqrt(num) % 1 <= 0;
+  return Math.sqrt(num) % 1 === 0;
 }
 
 /**
@@ -350,7 +350,7 @@ function getSine(num) {
  * 2, 2    => '10'
  */
 function numberToStringInBase(number, base) {
-  return parseInt(number, base);
+  return number.toString(base);
 }
 
 /**
@@ -566,7 +566,8 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  const sum = x1 + x2 + x3;
+  return +sum.toFixed(1);
 }
 
 /**
@@ -612,7 +613,13 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  return Math.sqrt(a ** 2 + b ** 2);
+  let result = Math.sqrt(a ** 2 + b ** 2);
+
+  if (!Number.isFinite(result)) {
+    result = 1.7976931348623157e308;
+  }
+
+  return result;
 }
 
 /**
@@ -629,13 +636,7 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  const arr = [];
-  for (let i = 0; i <= number; i += 1) {
-    if (i % 2 !== 0) {
-      arr.push(i);
-    }
-  }
-  return arr.length;
+  return Math.floor((Math.abs(number) + 1) / 2);
 }
 
 module.exports = {
